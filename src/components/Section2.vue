@@ -2,11 +2,12 @@
     <div class="flex flex-col top-0 left-0 w-full min-h-screen h-auto bg-white items-center justify-start p-10">
         <h1 class="text-4xl font-semibold text-center">Bowlix: Where Fun ans Flavor Collide</h1>
         <span class="text-center mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-16 mt-10">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+        <div ref="cardsContainer" 
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-16 mt-10">
+            <Card class="card-rotate-item"/>
+            <Card class="card-rotate-item"/>
+            <Card class="card-rotate-item"/>
+            <Card class="card-rotate-item"/>
         </div>
 
         <div class="flex flex-col lg:flex-row items-center justify-center w-full gap-x-5">
@@ -29,5 +30,87 @@
 <script setup>
 import Card from './Card.vue';
 import bolos from '../assets/bolos.png'
+import '../CSS/Section2.css';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { gsap } from 'gsap';
+
+const cardsContainer = ref(null);
+let observer = null;
+let animationDone = false;
+
+onMounted(() => {
+    if (!cardsContainer.value) return;
+
+    const cardElements = Array.from(cardsContainer.value.querySelectorAll('.card-rotate-item'));
+
+    if (cardElements.length === 0) return;
+
+    // logica para abtener las posiciones de los elementos
+    const mindPoint = Math.ceil(cardElements.length / 2);
+    const leftCards = cardElements.slice(0, mindPoint);
+    const rightCards = cardElements.slice(mindPoint);
+
+    if (leftCards.length > 0) {
+        gsap.set(leftCards, {
+            rotateY: 90,
+            opacity: 0,
+            transformOrigin: 'left center',
+        });
+    }
+
+    if (rightCards.length > 0) {
+        gsap.set(rightCards, {
+            rotateY: -90,
+            opacity: 0,
+            transformOrigin: 'right center',
+        });
+    }
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1, // tiempo para que el elemento sea visible
+    };
+
+    observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting && !animationDone) {
+                animationDone = true;
+
+                if (leftCards.length > 0) {
+                    gsap.to(leftCards, {
+                        rotateY: 0,
+                        opacity: 1,
+                        duration: 1,
+                        stagger: 0.2,
+                    });
+                }
+
+                if (rightCards.length > 0) {
+                    gsap.to(rightCards, {
+                        rotateY: 0,
+                        opacity: 1,
+                        duration: 2,
+                        stagger: 0.2,
+                    });
+                }
+
+                if (cardsContainer.value) {
+                    observer.unobserve(cardsContainer.value);
+                }
+            }
+        });
+    }, options);
+
+    observer.observe(cardsContainer.value);
+})
+
+
+onBeforeUnmount(() => {
+    if (observer && cardsContainer.value) {
+        observer.unobserve(cardsContainer.value);
+    }
+    observer = null;
+})
 
 </script>

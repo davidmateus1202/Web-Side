@@ -5,7 +5,7 @@
                 <img :src="props.image" class="w-16 h-16">
             </div>
         </div>
-        <div class="flex flex-col items-center justify-center w-full h-auto bg-white p-5 rounded-xl translate-y-[-80px]">
+        <div class="flex flex-col items-center justify-center w-full h-full bg-white p-5 rounded-xl translate-y-[-80px]">
             <h1 class="text-lg text-center font-semibold mt-20">{{ props.title }}</h1>
             <p class="text-center mt-5 text-sm">{{ props.description }}</p>
         </div>

@@ -2,10 +2,8 @@
     <nav
         class="fixed w-full z-20 top-0 start-0 bg-transparent">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Blowling</span>
-            </a>
+            <img :src="logo" class="h-18" alt="Flowbite Logo">
+                
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
                 <ul
                     class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
@@ -32,7 +30,7 @@
 
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <div class="hidden xl:flex items-center gap-x-5">
-                    <div class="flex w-18 h-18 items-center justify-center bg-[#246364] rounded-full">
+                    <div class="flex w-14 h-14 items-center justify-center bg-[#246364] rounded-full">
                         <svg  xmlns="http://www.w3.org/2000/svg"  
                             width="30"  
                             height="30"  
@@ -51,7 +49,7 @@
                 </div>
 
                 <div class="hidden xl:flex items-center gap-x-5 ml-5">
-                    <div class="flex w-18 h-18 items-center justify-center bg-[#246364] rounded-full">
+                    <div class="flex w-14 h-14 items-center justify-center bg-[#246364] rounded-full">
                         <svg  
                             xmlns="http://www.w3.org/2000/svg"  
                             width="30"  
@@ -90,3 +88,7 @@
     </nav>
 
 </template>
+
+<script setup>
+import logo from '../assets/logo.png'
+</script>

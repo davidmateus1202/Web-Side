@@ -11,6 +11,14 @@
         <!-- section 3 -->
         <Section3 />
 
+        <!-- section 4 -->
+        <Section4 />
+
+        <!-- section 5 -->
+        <Section5 />
+
+        <!-- Footer -->
+        <Footer />
     </div>
 </template>
 
@@ -19,5 +27,8 @@ import NavBar from '../components/NavBar.vue'
 import Carrusel from '../components/Carrusel.vue'
 import Section2 from '../components/Section2.vue'
 import Section3 from '../components/Section3.vue'
+import Section4 from '../components/Section4.vue'
+import Section5 from '../components/Section5.vue'
+import Footer from '../components/Footer.vue'
 
 </script>
