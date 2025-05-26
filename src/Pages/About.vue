@@ -1,27 +1,25 @@
 <template>
-
-    <div v-if="allComponentsReady && !showLoadingScreen" class="flex flex-col top-0 left-0 w-full h-full bg-white overflow-x-hidden">
+    <div class="flex flex-col top-0 left-0 w-full h-full bg-white overflow-x-hidden">
         <NavBar />
-        <Carrusel />
+        <!-- Header -->
+        <Header :title="'Nosotros'" />
+        <!-- section 2 -->
         <Section2 />
+        <!-- section 3 -->
         <Section3 />
-        <Section4 />
-        <Section5 />
+        <!-- Footer -->
         <Footer />
     </div>
-
     <!-- El componente de carga. -->
     <Loading v-if="showLoadingScreen" :is-actually-loading="!allComponentsReady" />
 </template>
 
 <script setup>
 import NavBar from '../components/NavBar.vue'
-import Carrusel from '../components/Carrusel.vue'
+import Footer from '../components/Footer.vue'
+import Header from '../components/Header.vue'
 import Section2 from '../components/Section2.vue'
 import Section3 from '../components/Section3.vue'
-import Section4 from '../components/Section4.vue'
-import Section5 from '../components/Section5.vue'
-import Footer from '../components/Footer.vue'
 import Loading from './Loading.vue'
 import { ref, onMounted } from 'vue'
 
@@ -47,5 +45,4 @@ onMounted(async () => {
         showLoadingScreen.value = false; // Desmonta Loading.vue y muestra el contenido
     }, (totalLoadingTransitionTime * 1000) + 100); // Multiplicar por 1000 para ms y añadir un pequeño buffer (100ms)
 });
-
 </script>

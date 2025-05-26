@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="fixed w-full z-20 top-0 start-0 bg-transparent">
+        class="fixed w-full z-30 top-0 start-0 bg-transparent">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <img :src="logo" class="h-18" alt="Flowbite Logo">
                 
@@ -8,22 +8,19 @@
                 <ul
                     class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
                     <li>
-                        <a class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0">Home</a>
+                        <button @click="navigateTo('Home')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Inicio</button>
                     </li>
                     <li>
-                        <a class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0">About Us</a>     
+                        <button @click="navigateTo('About')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Nosotros</button>     
                     </li>
                     <li>
-                        <a class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0">Services</a>
+                        <button @click="navigateTo('Services')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Servicios</button>
                     </li>
                     <li>
-                        <a class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0">Gallery</a>
+                        <button @click="navigateTo('Gallery')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Galeria</button>
                     </li>
                     <li>
-                        <a class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0">Blog</a>
-                    </li>
-                    <li>
-                        <a class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0">Contact</a>
+                        <button @click="navigateTo('Contact')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Contacto</button>
                     </li>
                 </ul>
             </div>
@@ -91,4 +88,17 @@
 
 <script setup>
 import logo from '../assets/logo.png'
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const navigateTo = (name) => {
+  try {
+    router.push({ name });
+  } catch (e) {
+    console.error('Navigation error:', e);
+  }
+};
+
+
 </script>
