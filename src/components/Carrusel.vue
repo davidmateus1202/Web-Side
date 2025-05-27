@@ -19,7 +19,7 @@
                 familia?</h1>
             <p class="hidden md:block mt-4 text-sm md:text-lg text-white font-semibold mb-5">¡Ven a disfrutar de una experiencia única en nuestra
                 bolera!</p>
-            <Button :text="'R e s e r v a r'" />
+            <Button :action="() => navigateTo('Reserve')" :text="'R e s e r v a r'" />
         </div>
 
           <template v-if="images.length > 1">
@@ -54,6 +54,7 @@ import Button from './Button.vue'; // Asegúrate que la ruta es correcta
 import selvaFondo1 from '../assets/selva-fondo-1.png';
 import selvaFondo2 from '../assets/selva-fondo-2.png';
 import selvaFondo3 from '../assets/selva-fondo-3.png';
+import { useRouter } from 'vue-router'; // Importa useRouter si necesitas navegación
 import '../CSS/Carrusel.css';
 
 const images = ref([
@@ -62,6 +63,7 @@ const images = ref([
     { src: selvaFondo3, alt: 'Image 3' },
 ]);
 
+const router = useRouter(); // Inicializa el router si necesitas navegación
 const currentIndex = ref(0);
 const intervalId = ref(null);
 const transitionDuration = 5000; // Duración del intervalo para cambio automático
@@ -112,6 +114,10 @@ onUnmounted(() => {
         clearInterval(intervalId.value);
     }
 });
+
+const navigateTo = (path) => {
+    router.push({ path });
+}
 </script>
 
 <style>

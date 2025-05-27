@@ -34,7 +34,7 @@
 </style>
 
 <template>
-  <a class="btn" href="#">{{ props.text }}</a>
+  <button class="btn" @click="props.action">{{ props.text }}</button>
 </template>
 
 <script setup>
@@ -46,6 +46,10 @@ const props = defineProps({
     required: true,
     default: 'Button'
   },
+  action: {
+    type: Function,
+    default: () => {}
+  }
 });
 
 </script>

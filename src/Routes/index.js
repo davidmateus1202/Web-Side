@@ -7,6 +7,7 @@ import Services from '../Pages/Servicios.vue'
 import Gallery from '../Pages/Gallery.vue'
 import Contact from '../Pages/Contact.vue'
 import NotFound from '../Pages/NotFound.vue'
+import Reserve from '../Pages/Reserve.vue'
 
 const routes = [
     {
@@ -37,6 +38,11 @@ const routes = [
     {
         path: '/:pathMatch(.*)*',
         component: NotFound,
+    },
+    {
+        path: '/reserve',
+        name: 'Reserve',
+        component: Reserve,
     }
 
 ]
