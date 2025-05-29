@@ -127,6 +127,10 @@
                         </button>
                     </div>
                 </div>
+                <span class="text-[#246364] font-medium text-sm mt-16">Paso 3</span>
+                <button class="flex items-center justify-center w-full h-auto p-3 bg-[#246364] text-white rounded-2xl font-semibold hover:bg-[#1f4f4f] transition duration-300 mb-16">
+                    Finalizar reserva
+                </button>
             </div>
         </div>
         <!-- Footer -->

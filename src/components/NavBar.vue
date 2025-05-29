@@ -1,6 +1,8 @@
 <template>
-    <nav
-        class="fixed w-full z-30 top-0 start-0 bg-transparent">
+    <nav :class="[
+        'fixed w-full z-30 top-0 start-0 transition-all duration-300 ease-in-out',
+        isScrolled ? 'bg-white' : 'bg-transparent',
+    ]">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <img :src="logo" class="h-18" alt="Flowbite Logo">
                 
@@ -8,19 +10,34 @@
                 <ul
                     class="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
                     <li>
-                        <button @click="navigateTo('Home')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Inicio</button>
+                        <button @click="navigateTo('Home')" :class="[
+                            'block py-2 px-3 rounded-sm md:bg-transparent md:p-0 cursor-pointer',
+                            isScrolled ? 'text-black hover:bg-gray-100 md:hover:bg-transparent' : 'text-white hover:bg-gray-100 md:hover:bg-transparent'
+                        ]">Inicio</button>
                     </li>
                     <li>
-                        <button @click="navigateTo('About')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Nosotros</button>     
+                        <button @click="navigateTo('About')" :class="[
+                            'block py-2 px-3 rounded-sm md:bg-transparent md:p-0 cursor-pointer',
+                            isScrolled ? 'text-black hover:bg-gray-100 md:hover:bg-transparent' : 'text-white hover:bg-gray-100 md:hover:bg-transparent'
+                        ]">Nosotros</button>     
                     </li>
                     <li>
-                        <button @click="navigateTo('Services')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Servicios</button>
+                        <button @click="navigateTo('Services')" :class="[
+                            'block py-2 px-3 rounded-sm md:bg-transparent md:p-0 cursor-pointer',
+                            isScrolled ? 'text-black hover:bg-gray-100 md:hover:bg-transparent' : 'text-white hover:bg-gray-100 md:hover:bg-transparent'
+                        ]">Servicios</button>
                     </li>
                     <li>
-                        <button @click="navigateTo('Gallery')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Galeria</button>
+                        <button @click="navigateTo('Gallery')" :class="[
+                            'block py-2 px-3 rounded-sm md:bg-transparent md:p-0 cursor-pointer',
+                            isScrolled ? 'text-black hover:bg-gray-100 md:hover:bg-transparent' : 'text-white hover:bg-gray-100 md:hover:bg-transparent'
+                        ]">Galeria</button>
                     </li>
                     <li>
-                        <button @click="navigateTo('Contact')" class="block py-2 px-3 text-white rounded-sm md:bg-transparent md:p-0 cursor-pointer">Contacto</button>
+                        <button @click="navigateTo('Contact')" :class="[
+                            'block py-2 px-3 rounded-sm md:bg-transparent md:p-0 cursor-pointer',
+                            isScrolled ? 'text-black hover:bg-gray-100 md:hover:bg-transparent' : 'text-white hover:bg-gray-100 md:hover:bg-transparent'
+                        ]">Contacto</button>
                     </li>
                 </ul>
             </div>
@@ -42,7 +59,10 @@
                             <path d="M15 6h6m-3 -3v6" />
                         </svg>
                     </div>
-                    <h2 class="text-lg font-semibold text-white">+57-3218536985</h2>
+                    <h2 :class="[
+                        'text-lg font-semibold',
+                        isScrolled ? 'text-black' : 'text-white'
+                    ]">+57-3218536985</h2>
                 </div>
 
                 <div class="hidden xl:flex items-center gap-x-5 ml-5">
@@ -67,7 +87,10 @@
                             <path d="M21 16l-5 3l5 2" />
                         </svg>
                     </div>
-                    <h2 class="text-lg font-semibold text-white">Calle 10 #20 - 85</h2>
+                    <h2 :class="[
+                        'text-lg font-semibold',
+                        isScrolled ? 'text-black' : 'text-white'
+                    ]">Calle 10 #20 - 85</h2>
                 </div>
 
                 <button data-collapse-toggle="navbar-sticky" type="button"
@@ -87,10 +110,30 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted, ref } from 'vue';
 import logo from '../assets/logo.png'
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const point_scroll = 400;
+const isScrolled = ref(false);
+
+const handleScroll = () => {
+    if (window.scrollY > point_scroll) {
+        isScrolled.value = true;
+    } else {
+        isScrolled.value = false;
+    }
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check scroll position on mount
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+});
 
 const navigateTo = (name) => {
   try {
